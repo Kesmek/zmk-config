@@ -106,6 +106,12 @@
                 combo_z       { timeout-ms = <50>; key-positions = <2 3>;   layers = <0>; bindings = <&kp Z>; };
                 combo_qu      { timeout-ms = <50>; key-positions = <2 4>;   layers = <0>; bindings = <&qu>; };
                 combo_caps    { timeout-ms = <50>; key-positions = <28 31>; layers = <0>; bindings = <&kp CAPS>; };
+
+                // Sticky symbols. Positions 6 and 9 are - and / : punctuation
+                // rather than letters, so there is no bigram to misfire on, and
+                // neither key is hot enough for the combo buffering to matter.
+                // No prior-idle guard, symbols are needed mid-token (foo->bar).
+                combo_sym     { timeout-ms = <50>; key-positions = <6 9>;   layers = <0>; bindings = <&sl 4>; };
         };
 
         keymap {
