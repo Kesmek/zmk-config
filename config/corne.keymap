@@ -144,7 +144,7 @@
    &kp KP_NUM &kp F9 &kp F10 &kp F11 &kp F12 &kp PSCRN   &kp KP_DIVIDE &kp N7 &kp N8 &kp N9 &kp KP_PLUS     &tog 5
    &trans     &kp F5 &kp F6  &kp F7  &kp F8  &kp F13     &kp DOT       &kp N4 &kp N5 &kp N6 &kp KP_MULTIPLY &trans
    &trans     &kp F1 &kp F2  &kp F3  &kp F4  &kp F14     &kp N0        &kp N1 &kp N2 &kp N3 &kp KP_MINUS    &trans
-                     &trans  &trans  &trans               &kp BSPC     &kp N0 &kp KP_EQUAL
+                     &trans  &trans  &trans               &trans       &kp N0 &kp KP_EQUAL
                         >;
                 };
 
@@ -165,12 +165,12 @@
                 nav_layer {
 // -----------------------------------------------------------------------------------------
 // | BOOT | BT0 | BT1 | BT2 | BT3 | BT4 |   | USB | BLE |BTCLR|UNLCK|RESET|     |   <- added, was dead
-// |      |     |PREV | VOL-| VOL+|NEXT |   | LFT | DWN |  UP | RGT | CAPS|  Q  |   <- Q fallback, base has TAB there now
+// |      |     |PREV | VOL-| VOL+|NEXT |   | LFT | DWN |  UP | RGT | CAPS|     |
 // |      |     | CUT | COPY|PASTE|     |   |HOME |PGDN |PGUP | END | INS |     |
 //                    |     |     |     |   |MUTE |PLAY | ENT |   <- moved off the left thumbs, which now hold this layer
                         bindings = <
    &bootloader &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &out OUT_USB &out OUT_BLE &bt BT_CLR &studio_unlock &sys_reset &none
-   &none       &none        &kp C_PREV   &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT     &kp LEFT     &kp DOWN     &kp UP     &kp RIGHT      &kp CAPS   &kp Q
+   &none       &none        &kp C_PREV   &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT     &kp LEFT     &kp DOWN     &kp UP     &kp RIGHT      &kp CAPS   &none
    &none       &none        &kp K_CUT    &kp K_COPY   &kp K_PASTE  &none          &kp HOME     &kp PG_DN    &kp PG_UP  &kp END        &kp INS    &none
                             &trans       &trans       &trans                      &kp C_MUTE   &kp C_PP     &kp RET
                         >;
