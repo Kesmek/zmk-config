@@ -104,11 +104,11 @@
                 combo_q       { timeout-ms = <50>; key-positions = <3 4>;   layers = <0>; bindings = <&kp Q>; };
                 combo_z       { timeout-ms = <50>; key-positions = <2 3>;   layers = <0>; bindings = <&kp Z>; };
                 combo_qu      { timeout-ms = <50>; key-positions = <2 4>;   layers = <0>; bindings = <&qu>; };
-                // prior-idle guard: 28+31 are L and U, and "ul" lands in would,
-                // could, should, result, difficult. Cross-hand alternating pairs
-                // overlap easily at speed. CAPS is never mid-word, so gating it
-                // on 150ms of idle costs nothing.
-                combo_caps    { timeout-ms = <50>; require-prior-idle-ms = <150>; key-positions = <28 31>; layers = <0>; bindings = <&kp CAPS>; };
+                // No caps combo. 28+31 were L and U, and "ul" lands in would,
+                // could, should, result, difficult. A prior-idle guard fixed it
+                // here but QMK has no per-combo equivalent, so the boards could
+                // not match. CAPS lives on the nav layer at position 22, which
+                // is cross-hand from the nav thumb.
 
                 // Sticky symbols. Positions 6 and 9 are - and / : punctuation
                 // rather than letters, so there is no bigram to misfire on, and
