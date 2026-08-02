@@ -15,17 +15,41 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 
+// Vial: mousekey_interval 20 x time_to_max 30 ~= 600ms to full speed.
+// ZMK defaults to 300ms, which feels twitchy next to the original.
+&mmv {
+        time-to-max-speed-ms = <600>;
+};
+
 / {
         behaviors {
                 // Vial: tapping_term 200, quick_tap_term 200, flow_tap_term 80,
                 // permissive_hold on, hold_on_other_key_press off -> "balanced".
-                hm: home_row_mod {
+                // Positional hold-tap: a mod only engages if the next key is on the
+                // other hand, which kills same-hand roll misfires. Vial had
+                // chordal_hold off, so this is an upgrade on the source, not a port.
+                // hold-trigger-on-release keeps same-hand mod stacks (ctrl+shift).
+                hml: home_row_mod_left {
                         compatible = "zmk,behavior-hold-tap";
                         #binding-cells = <2>;
                         flavor = "balanced";
                         tapping-term-ms = <200>;
                         quick-tap-ms = <200>;
                         require-prior-idle-ms = <80>;
+                        hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 39 40 41>;
+                        hold-trigger-on-release;
+                        bindings = <&kp>, <&kp>;
+                };
+
+                hmr: home_row_mod_right {
+                        compatible = "zmk,behavior-hold-tap";
+                        #binding-cells = <2>;
+                        flavor = "balanced";
+                        tapping-term-ms = <200>;
+                        quick-tap-ms = <200>;
+                        require-prior-idle-ms = <80>;
+                        hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38>;
+                        hold-trigger-on-release;
                         bindings = <&kp>, <&kp>;
                 };
 
@@ -74,9 +98,9 @@
                 // keycode, ZMK combos match on position. Without this, positions
                 // 7 8 9 are 7 8 9 on the number layer, so typing "78" would fire
                 // TAB and "789" would fire alt-tab.
-                // Longest match wins regardless of the order listed here: ZMK holds
-                // a fully-pressed combo until its candidates are exhausted.
-                combo_alt_tab { timeout-ms = <50>; key-positions = <7 8 9>; layers = <0>; bindings = <&alt_tab>; };
+                // alt-tab used to be a 7+8+9 combo. Dropped: it made 7+8 (TAB) wait
+                // out the full 50ms window to rule out a third key. alt_tab now
+                // lives on position 35, which was dead on the base layer.
                 combo_tab     { timeout-ms = <50>; key-positions = <7 8>;   layers = <0>; bindings = <&kp TAB>; };
                 combo_q       { timeout-ms = <50>; key-positions = <3 4>;   layers = <0>; bindings = <&kp Q>; };
                 combo_z       { timeout-ms = <50>; key-positions = <2 3>;   layers = <0>; bindings = <&kp Z>; };
@@ -91,12 +115,12 @@
 // -----------------------------------------------------------------------------------------
 // | ALT  |  V  |  W  |  G  |  M  |  J  |   |  -  |  .  |  '  |  /  |  =  | TD0 |
 // | SHFT |  S  |  N  |  T  |  H  |  K  |   |  ,  |  A  |  E  |  I  |  C  |  Q  |
-// | CTRL |  F  |  P  |  D  |  L  |  X  |   |  ;  |  U  |  O  |  Y  |  B  |     |
+// | CTRL |  F  |  P  |  D  |  L  |  X  |   |  ;  |  U  |  O  |  Y  |  B  |ALTAB|
 //                    | ESC | L1/R| L4/ENT|  | L3/BSPC| SPC | L2/DEL |
                         bindings = <
    &kp LALT  &kp V      &kp W      &kp G       &kp M       &kp J    &kp MINUS &kp DOT      &kp SQT      &kp FSLH    &kp EQUAL   &td0
-   &kp LSHFT &hm LGUI S &hm LALT N &hm LCTRL T &hm LSHFT H &kp K    &kp COMMA &hm RSHFT A  &hm RCTRL E  &hm RALT I  &hm RGUI C  &kp Q
-   &kp LCTRL &kp F      &kp P      &kp D       &kp L       &kp X    &kp SEMI  &kp U        &kp O        &kp Y       &kp B       &none
+   &kp LSHFT &hml LGUI S &hml LALT N &hml LCTRL T &hml LSHFT H &kp K  &kp COMMA &hmr RSHFT A &hmr RCTRL E &hmr RALT I &hmr RGUI C &kp Q
+   &kp LCTRL &kp F       &kp P       &kp D        &kp L        &kp X  &kp SEMI  &kp U        &kp O        &kp Y       &kp B       &alt_tab
                         &kp ESC    &ltb 1 R    &ltb 4 RET            &ltb 3 BSPC &kp SPACE &ltb 2 DEL
                         >;
                 };
