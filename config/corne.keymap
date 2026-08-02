@@ -70,13 +70,18 @@
         combos {
                 compatible = "zmk,combos";
 
-                // Listed longest-first: 7+8+9 must win over 7+8.
-                combo_alt_tab { timeout-ms = <50>; key-positions = <7 8 9>; bindings = <&alt_tab>; };
-                combo_tab     { timeout-ms = <50>; key-positions = <7 8>;   bindings = <&kp TAB>; };
-                combo_q       { timeout-ms = <50>; key-positions = <3 4>;   bindings = <&kp Q>; };
-                combo_z       { timeout-ms = <50>; key-positions = <2 3>;   bindings = <&kp Z>; };
-                combo_qu      { timeout-ms = <50>; key-positions = <2 4>;   bindings = <&qu>; };
-                combo_caps    { timeout-ms = <50>; key-positions = <28 31>; bindings = <&kp CAPS>; };
+                // layers = <0> is required, not cosmetic. Vial combos match on
+                // keycode, ZMK combos match on position. Without this, positions
+                // 7 8 9 are 7 8 9 on the number layer, so typing "78" would fire
+                // TAB and "789" would fire alt-tab.
+                // Longest match wins regardless of the order listed here: ZMK holds
+                // a fully-pressed combo until its candidates are exhausted.
+                combo_alt_tab { timeout-ms = <50>; key-positions = <7 8 9>; layers = <0>; bindings = <&alt_tab>; };
+                combo_tab     { timeout-ms = <50>; key-positions = <7 8>;   layers = <0>; bindings = <&kp TAB>; };
+                combo_q       { timeout-ms = <50>; key-positions = <3 4>;   layers = <0>; bindings = <&kp Q>; };
+                combo_z       { timeout-ms = <50>; key-positions = <2 3>;   layers = <0>; bindings = <&kp Z>; };
+                combo_qu      { timeout-ms = <50>; key-positions = <2 4>;   layers = <0>; bindings = <&qu>; };
+                combo_caps    { timeout-ms = <50>; key-positions = <28 31>; layers = <0>; bindings = <&kp CAPS>; };
         };
 
         keymap {
