@@ -101,7 +101,6 @@
                 // alt-tab used to be a 7+8+9 combo. Dropped: it made 7+8 (TAB) wait
                 // out the full 50ms window to rule out a third key. alt_tab now
                 // lives on position 35, which was dead on the base layer.
-                combo_tab     { timeout-ms = <50>; key-positions = <7 8>;   layers = <0>; bindings = <&kp TAB>; };
                 combo_q       { timeout-ms = <50>; key-positions = <3 4>;   layers = <0>; bindings = <&kp Q>; };
                 combo_z       { timeout-ms = <50>; key-positions = <2 3>;   layers = <0>; bindings = <&kp Z>; };
                 combo_qu      { timeout-ms = <50>; key-positions = <2 4>;   layers = <0>; bindings = <&qu>; };
@@ -120,12 +119,12 @@
                 base_layer {
 // -----------------------------------------------------------------------------------------
 // | ALT  |  V  |  W  |  G  |  M  |  J  |   |  -  |  .  |  '  |  /  |  =  | TD0 |
-// | SHFT |  S  |  N  |  T  |  H  |  K  |   |  ,  |  A  |  E  |  I  |  C  |  Q  |
+// | SHFT |  S  |  N  |  T  |  H  |  K  |   |  ,  |  A  |  E  |  I  |  C  | TAB |
 // | CTRL |  F  |  P  |  D  |  L  |  X  |   |  ;  |  U  |  O  |  Y  |  B  |ALTAB|
 //                    |L3/ESC| L1/R| L4/ENT|  | BSPC | SPC | L2/DEL |
                         bindings = <
    &kp LALT  &kp V      &kp W      &kp G       &kp M       &kp J    &kp MINUS &kp DOT      &kp SQT      &kp FSLH    &kp EQUAL   &td0
-   &kp LSHFT &hml LGUI S &hml LALT N &hml LCTRL T &hml LSHFT H &kp K  &kp COMMA &hmr RSHFT A &hmr RCTRL E &hmr RALT I &hmr RGUI C &kp Q
+   &kp LSHFT &hml LGUI S &hml LALT N &hml LCTRL T &hml LSHFT H &kp K  &kp COMMA &hmr RSHFT A &hmr RCTRL E &hmr RALT I &hmr RGUI C &kp TAB
    &kp LCTRL &kp F       &kp P       &kp D        &kp L        &kp X  &kp SEMI  &kp U        &kp O        &kp Y       &kp B       &alt_tab
                         &ltb 3 ESC &ltb 1 R    &ltb 4 RET            &kp BSPC    &kp SPACE &ltb 2 DEL
                         >;
@@ -162,12 +161,12 @@
                 nav_layer {
 // -----------------------------------------------------------------------------------------
 // | BOOT | BT0 | BT1 | BT2 | BT3 | BT4 |   | USB | BLE |BTCLR|UNLCK|RESET|     |   <- added, was dead
-// |      |     |PREV | VOL-| VOL+|NEXT |   | LFT | DWN |  UP | RGT | CAPS|     |
+// |      |     |PREV | VOL-| VOL+|NEXT |   | LFT | DWN |  UP | RGT | CAPS|  Q  |   <- Q fallback, base has TAB there now
 // |      |     | CUT | COPY|PASTE|     |   |HOME |PGDN |PGUP | END | INS |     |
 //                    |     |     |     |   |MUTE |PLAY | ENT |   <- moved off the left thumbs, which now hold this layer
                         bindings = <
    &bootloader &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &out OUT_USB &out OUT_BLE &bt BT_CLR &studio_unlock &sys_reset &none
-   &none       &none        &kp C_PREV   &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT     &kp LEFT     &kp DOWN     &kp UP     &kp RIGHT      &kp CAPS   &none
+   &none       &none        &kp C_PREV   &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT     &kp LEFT     &kp DOWN     &kp UP     &kp RIGHT      &kp CAPS   &kp Q
    &none       &none        &kp K_CUT    &kp K_COPY   &kp K_PASTE  &none          &kp HOME     &kp PG_DN    &kp PG_UP  &kp END        &kp INS    &none
                             &trans       &trans       &trans                      &kp C_MUTE   &kp C_PP     &kp RET
                         >;
